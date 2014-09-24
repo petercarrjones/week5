@@ -1,0 +1,33 @@
+---
+title: "StatePlot"
+author: "Pete"
+date: "09/24/2014"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+#Call history data library
+library(historydata)
+#pull in us_state_population data
+data(us_state_populations)
+#change to easy variable
+pops <- us_state_populations
+#create subset of dataset - all observations 1850 and before
+ma.data<-c()
+ma.data <- subset(pops, subset=(pops$year <= 1850 ))
+summary(ma.data)
+#Call ggplot2 library
+library(ggplot2)
+#plot state counts in a histogram (function: stars on the flag)
+maplot <- qplot(data = ma.data, x=state, geom=  "histogram" )
+#Use the Black and White theme
+last_plot() + theme_bw()
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

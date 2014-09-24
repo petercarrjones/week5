@@ -1,0 +1,32 @@
+---
+title: "Vaplot2"
+author: "Pete"
+date: "09/24/2014"
+output: html_document
+---
+
+A slightly prettier version of my Virginia state population through time.
+
+You can embed an R code chunk like this:
+
+```{r}
+library(historydata)
+data(us_state_populations)
+pops <- us_state_populations
+va.data<-c()
+va.data <- subset(pops, subset=(pops$state=="Virginia" ))
+summary(va.data)
+library(ggplot2)
+vaplot <- qplot(data=va.data, x=year, y=population*.00001, geom = c("line", "smooth"))
+vaplot + geom_histogram(stat= "identity", binwidth=0.5, fill="blue") 
+last_plot() + theme_bw() + labs(xlab="Year", ylab= "Virginia Population(in 100,000s)")
+
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

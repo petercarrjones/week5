@@ -1,0 +1,11 @@
+library(historydata)
+data(us_state_populations)
+pops <- us_state_populations
+va.data<-c()
+va.data <- subset(pops, subset=(pops$state=="Virginia" ))
+summary(va.data)
+library(ggplot2)
+vaplot <- qplot(data=va.data, x=year, y=population*.00001, geom = c("line", "smooth"))
+vaplot + geom_histogram(stat= "identity", binwidth=0.5, fill="blue") 
+last_plot() + theme_bw() + labs(xlab="Year", ylab= "Virginia Population(in 100,000s)")
+last_plot()

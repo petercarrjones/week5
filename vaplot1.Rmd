@@ -1,0 +1,32 @@
+---
+title: "tmp"
+author: "Pete"
+date: "09/23/2014"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r,}
+library(historydata)
+data(us_state_populations)
+pops <- us_state_populations
+pops$year <- as.Date.character(pops$year, "%Y")
+va.data<-c()
+va.data <- subset(pops, subset=(pops$state=="Virginia" ))
+summary(va.data)
+library(ggplot2)
+vaplot <- ggplot(data=va.data, aes(year, y=population))
+summary(vaplot)
+vaplot + geom_line()
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
